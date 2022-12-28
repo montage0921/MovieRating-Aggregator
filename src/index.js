@@ -46,6 +46,7 @@ function fetchThroughIMDB(title, year) {
   fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&y=${year}`)
     .then((res) => res.json())
     .then((res) => {
+      console.log(res);
       const title = res.Title;
       const year = res.Year;
       const director = res.Director;
@@ -55,9 +56,12 @@ function fetchThroughIMDB(title, year) {
       const imdbID = res.imdbID;
       const posteURL = res.Poster;
 
-      const imdbRating = res.imdbRating;
-      const mcRating = res.Metascore;
-      const tomatoRating = res.Ratings[1].Value;
+      const imdbRating =
+        res.imdbRating !== `N/A` ? `${res.imdbRating}/100` : `N/A`;
+
+      const tomatoRating = res.Ratings[1] ? `${res.Ratings[1].Value}` : `N/A`;
+
+      const mcRating = res.Metascore !== `N/A` ? `${res.Metascore}/100` : `N/A`;
 
       htmlText = ``;
       htmlText = `
@@ -84,15 +88,15 @@ function fetchThroughIMDB(title, year) {
        
         <div class="imdb">
           <img src="/src/assets/imdb.svg" alt="" />
-          <p>${imdbRating ? imdbRating : `N/A`}/10</p>
+          <p>${imdbRating}</p>
         </div>
         <div class="tomato">
           <img src="/src/assets/rottenTomato.svg" alt="" />
-          <p>${tomatoRating ? tomatoRating : `N/A`}</p>
+          <p>${tomatoRating}</p>
         </div>
         <div class="metacritic">
           <img src="/src/assets/metacritic.png" alt="" />
-          <p>${mcRating ? mcRating : `N/A`}/100</p>
+          <p>${mcRating}</p>
         </div>
       </div>
     </div> 
