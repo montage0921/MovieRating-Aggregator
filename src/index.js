@@ -2,7 +2,7 @@ import "./style.css";
 
 const apiKey = `6d8db339`;
 
-const body = document.querySelector(`body`);
+const displayContainer = document.querySelector(`.displayContainer`);
 
 const titleInput = document.querySelector(`#title`);
 const yearInput = document.querySelector(`#year`);
@@ -99,7 +99,8 @@ function fetchThroughIMDB(title, year) {
      
      `;
 
-      body.insertAdjacentHTML(`beforeend`, htmlText);
+      displayContainer.innerHTML = ``;
+      displayContainer.insertAdjacentHTML(`beforeend`, htmlText);
     })
     .catch((error) => {
       console.log(error);
@@ -118,7 +119,9 @@ function fetchThroughIMDB(title, year) {
     </div>
       `;
 
-      body.insertAdjacentHTML(`beforeend`, htmlText);
+      displayContainer.innerHTML = ``;
+
+      displayContainer.insertAdjacentHTML(`beforeend`, htmlText);
     });
 }
 
