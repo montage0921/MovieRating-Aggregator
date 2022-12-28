@@ -1,0 +1,30 @@
+{
+  "name": "movierating-aggregator",
+  "version": "1.0.0",
+  "description": "A movie rating aggregator website that can display a movie's rating from a variety of popular movie databases",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montage0921/MovieRating-Aggregator.git"
+  },
+  "author": "Gary Shi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montage0921/MovieRating-Aggregator/issues"
+  },
+  "homepage": "https://github.com/montage0921/MovieRating-Aggregator#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "douban-api-v2": "^1.0.0"
+  }
+}
