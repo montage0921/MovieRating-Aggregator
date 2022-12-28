@@ -124,6 +124,7 @@ button:active {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border-right: 1px dashed grey;
 }
 
 .movieInfo h2,
