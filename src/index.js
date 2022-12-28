@@ -24,6 +24,8 @@ searchBtn.addEventListener(`click`, function (e) {
 
   if (!title || !year) return;
 
+  if (isAlphaNumericSpecial(title)) console.log(`english`);
+
   fetch(`https://api.wmdb.tv/api/v1/movie/search?q=${title}&year=${year}`)
     .then((res) => res.json())
     .then((res) => {
@@ -71,3 +73,7 @@ searchBtn.addEventListener(`click`, function (e) {
       const imdbID = imdb.imdbID;
     });
 });
+
+function isAlphaNumericSpecial(str) {
+  return /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]+$/.test(str);
+}

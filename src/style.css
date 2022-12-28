@@ -95,7 +95,8 @@ button:active {
   opacity: 0;
 }
 
-.movieCard {
+.movieCard,
+.movieCard-en {
   position: absolute;
   top: 40%;
   width: 700px;
@@ -133,7 +134,7 @@ button:active {
   margin: 0;
 }
 
-#title-cn {
+#main-title {
   color: black;
 }
 
