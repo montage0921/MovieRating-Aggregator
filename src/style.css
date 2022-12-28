@@ -83,22 +83,19 @@ button:active {
   transform: scale(1);
 }
 
-.errorBox {
+.displayContainer {
   position: absolute;
   top: 40%;
+}
+
+.errorBox {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-.hidden {
-  opacity: 0;
-}
-
 .movieCard,
 .movieCard-en {
-  position: absolute;
-  top: 40%;
   width: 700px;
   height: 345px;
 

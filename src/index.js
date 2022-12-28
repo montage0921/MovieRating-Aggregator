@@ -2,6 +2,8 @@ import "./style.css";
 
 const apiKey = `6d8db339`;
 
+const body = document.querySelector(`body`);
+
 const titleInput = document.querySelector(`#title`);
 const yearInput = document.querySelector(`#year`);
 const inputs = [titleInput, yearInput];
@@ -9,23 +11,118 @@ const errorMsg = `this cannot be empty`;
 
 const searchBtn = document.querySelector(`#searchMovie`);
 
+let htmlText;
+
 searchBtn.addEventListener(`click`, function (e) {
   e.preventDefault();
 
+  let title = titleInput.value;
+  let year = yearInput.value;
+
+  //form validation
   //Inputs must be filled
   inputs.forEach((input) => {
     if (input.validity.valueMissing)
       input.nextElementSibling.textContent = errorMsg;
     else input.nextElementSibling.textContent = ``;
   });
-
-  let title = titleInput.value;
-  let year = yearInput.value;
-
   if (!title || !year) return;
 
-  if (isAlphaNumericSpecial(title)) console.log(`english`);
+  //clear input fields
+  titleInput.value = ``;
+  yearInput.value = ``;
 
+  //support both english and chinese input
+  // movie card would be generated based on the language user input
+  if (isEnglish(title)) fetchThroughIMDB(title, year);
+  else fetchThroughDouban(title, year);
+});
+
+function isEnglish(str) {
+  return /^[A-Za-z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/.test(str);
+}
+
+function fetchThroughIMDB(title, year) {
+  fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&y=${year}`)
+    .then((res) => res.json())
+    .then((res) => {
+      const title = res.Title;
+      const year = res.Year;
+      const director = res.Director;
+      const actors = res.Actors.split(`, `).join(`/`);
+      const genre = res.Genre.split(`, `).join(`/`);
+
+      const imdbID = res.imdbID;
+      const posteURL = res.Poster;
+
+      const imdbRating = res.imdbRating;
+      const mcRating = res.Metascore;
+      const tomatoRating = res.Ratings[1].Value;
+
+      htmlText = ``;
+      htmlText = `
+      <div class="movieCard-en">
+      <div class="moviePoster">
+        <img
+          src="${posteURL}"
+          alt=""
+        />
+      </div>
+      <div class="movieInfo">
+        <div class="title">
+          <a href="https://www.imdb.com/title/${imdbID}/"
+            ><h2 id="main-title">${title}</h2></a
+          >
+        </div>
+        <h4>Director: ${director}</h4>
+        <h4>Cast: ${actors}</h4>
+        <h4>Year: ${year}</h4>
+        <h4>Genre: ${genre}</h4>
+      </div>
+
+      <div class="movieRating">
+       
+        <div class="imdb">
+          <img src="/src/assets/imdb.svg" alt="" />
+          <p>${imdbRating ? imdbRating : `N/A`}/10</p>
+        </div>
+        <div class="tomato">
+          <img src="/src/assets/rottenTomato.svg" alt="" />
+          <p>${tomatoRating ? tomatoRating : `N/A`}</p>
+        </div>
+        <div class="metacritic">
+          <img src="/src/assets/metacritic.png" alt="" />
+          <p>${mcRating ? mcRating : `N/A`}/100</p>
+        </div>
+      </div>
+    </div> 
+     
+     `;
+
+      body.insertAdjacentHTML(`beforeend`, htmlText);
+    })
+    .catch((error) => {
+      console.log(error);
+
+      htmlText = ``;
+      htmlText = `
+      <div class="errorBox ">
+      <img src="/src/assets/404.png" alt="" />
+      <div class="errorMsg">
+        <h2 class="errorMsg-toClient">
+          Sorry we didn't find your movie...
+
+          <h3 class="errorMsg-computer">Please double check your title and year </h3>
+        </h2>
+      </div>
+    </div>
+      `;
+
+      body.insertAdjacentHTML(`beforeend`, htmlText);
+    });
+}
+
+function fetchThroughDouban(title, year) {
   fetch(`https://api.wmdb.tv/api/v1/movie/search?q=${title}&year=${year}`)
     .then((res) => res.json())
     .then((res) => {
@@ -72,8 +169,4 @@ searchBtn.addEventListener(`click`, function (e) {
       const doubanID = douban.doubanId;
       const imdbID = imdb.imdbID;
     });
-});
-
-function isAlphaNumericSpecial(str) {
-  return /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]+$/.test(str);
 }
