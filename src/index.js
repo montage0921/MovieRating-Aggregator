@@ -58,7 +58,7 @@ function fetchThroughIMDB(title, year) {
       const posteURL = res.Poster;
 
       const imdbRating =
-        res.imdbRating !== `N/A` ? `${res.imdbRating}/100` : `N/A`;
+        res.imdbRating !== `N/A` ? `${res.imdbRating}/10` : `N/A`;
 
       const tomatoRating = res.Ratings[1] ? `${res.Ratings[1].Value}` : `N/A`;
 
@@ -70,7 +70,7 @@ function fetchThroughIMDB(title, year) {
       <div class="moviePoster">
         <img
           src="${posteURL}"
-          alt=""
+          alt="Movie Poster Not Available"
         />
       </div>
       <div class="movieInfo">
@@ -88,15 +88,15 @@ function fetchThroughIMDB(title, year) {
       <div class="movieRating">
        
         <div class="imdb">
-          <img src="/src/assets/imdb.svg" alt="" />
+          <img src="" alt="" />
           <p>${imdbRating}</p>
         </div>
         <div class="tomato">
-          <img src="/src/assets/rottenTomato.svg" alt="" />
+          <img src="" alt="" />
           <p>${tomatoRating}</p>
         </div>
         <div class="metacritic">
-          <img src="/src/assets/metacritic.png" alt="" />
+          <img src="" alt="" />
           <p>${mcRating}</p>
         </div>
       </div>
@@ -113,7 +113,7 @@ function fetchThroughIMDB(title, year) {
       htmlText = ``;
       htmlText = `
       <div class="errorBox ">
-      <img src="/src/assets/404.png" alt="" />
+      <img src="" alt="" />
       <div class="errorMsg">
         <h2 class="errorMsg-toClient">
           Sorry we didn't find your movie...

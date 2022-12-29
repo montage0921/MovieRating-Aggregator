@@ -94,6 +94,10 @@ button:active {
   align-items: center;
 }
 
+.errorBox img {
+  content: url(./assets/404.png);
+}
+
 .movieCard,
 .movieCard-en {
   width: 700px;
@@ -175,4 +179,16 @@ h4 {
 
 .movieRating img {
   height: 30px;
+}
+
+.imdb img {
+  content: url(/src/assets/imdb.svg);
+}
+
+.tomato img {
+  content: url(/src/assets/rottenTomato.svg);
+}
+
+.metacritic img {
+  content: url(/src/assets/metacritic.png);
 }
