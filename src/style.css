@@ -85,7 +85,7 @@ button:active {
 
 .displayContainer {
   position: absolute;
-  top: 40%;
+  top: 45%;
 }
 
 .errorBox {
@@ -109,6 +109,10 @@ button:active {
 
   display: grid;
   grid-template-columns: 1fr 1.5fr 0.5fr;
+}
+
+.moviePoster {
+  height: 345px;
 }
 
 .moviePoster img {

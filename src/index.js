@@ -39,14 +39,13 @@ searchBtn.addEventListener(`click`, function (e) {
 });
 
 function isEnglish(str) {
-  return /^[A-Za-z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$/.test(str);
+  return /^[a-zA-Z0-9\u0080-\u017F]+$/.test(str);
 }
 
 function fetchThroughIMDB(title, year) {
   fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&y=${year}`)
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       const title = res.Title;
       const year = res.Year;
       const director = res.Director;
