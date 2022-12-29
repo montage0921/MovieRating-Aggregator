@@ -42,8 +42,6 @@ function isEnglish(str) {
   return /^[A-Za-z0-9\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/.test(str);
 }
 
-console.log(isEnglish(`è`));
-
 function fetchThroughIMDB(title, year) {
   fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}&y=${year}`)
     .then((res) => res.json())
